@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        width: 100%;
+        height: auto;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+      thead > tr:nth-child(1) > th {
+        width: 100%;
+        height: 100px;
+        border-bottom: 3px solid navy;
+      }
+      thead > tr:nth-child(2) > th {
+        height: 50px;
+        margin: 0;
+        padding: 0;
+        border: 1px solid lightcyan;
+      }
+      tbody td {
+        height: 100px;
+        margin: 0;
+        padding: 0;
+        text-align: left;
+        vertical-align: top;
+        border: 0.5px solid lightgray;
+      }
+    </style>
+  </head>
+  <body>
+    몇월? <input id="month" type="text" />
+    <button id="button" type="button">달력보기</button>
+    <hr />
+    <button id="prev_button" type="button">이전달력</button>
+    <button id="next_button" type="button">다음달력</button>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="7"><span id="monthText"></span>월</th>
+        </tr>
+        <tr>
+          <th>일요일</th>
+          <th>월요일</th>
+          <th>화요일</th>
+          <th>수요일</th>
+          <th>목요일</th>
+          <th>금요일</th>
+          <th>토요일</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $("#button").on("click", function () {
+        var value = $("#month").val();
+
+        var date = new Date(2022, value - 1, 1);
+        var dayNumber = date.getDay(); // 0
+
+        var lastDay = new Date(2022, value, 0).getDate();
+
+        var tbody = $("table tbody");
+        var markup = "";
+
+        for (var i = 0; i < 6; i++) {
+          markup += "<tr>";
+          for (var j = 0; j < 7; j++) {
+            var day = j + 1 + 7 * i - dayNumber;
+            if (day > lastDay || day < 1) {
+              day = "";
+            }
+            markup += "<td>" + day + "</td>";
+          }
+          markup += "</tr>";
+        }
+        console.log(markup);
+
+        tbody.html(markup);
+        $("#monthText").text(value);
+      });
+
+      $("#prev_button").on("click", function () {
+        var value = $("#month").val();
+        var date = new Date(2022, value - 2, 1);
+        var dayNumber = date.getDay(); // 0
+
+        var lastDay = new Date(2022, value - 1, 0).getDate();
+
+        var tbody = $("table tbody");
+        var markup = "";
+
+        for (var i = 0; i < 6; i++) {
+          markup += "<tr>";
+          for (var j = 0; j < 7; j++) {
+            var day = j + 1 + 7 * i - dayNumber;
+            if (day > lastDay || day < 1) {
+              day = "";
+            }
+            markup += "<td>" + day + "</td>";
+          }
+          markup += "</tr>";
+        }
+        console.log(markup);
+
+        tbody.html(markup);
+        $("#monthText").text(value - 1);
+        $("#month").val(value - 1);
+      });
+
+      $("#next_button").on("click", function () {
+        var value = parseInt($("#month").val());
+        var date = new Date(2022, value, 1);
+        var dayNumber = date.getDay(); // 0
+
+        var lastDay = new Date(2022, value + 1, 0).getDate();
+
+        var tbody = $("table tbody");
+        var markup = "";
+
+        for (var i = 0; i < 6; i++) {
+          markup += "<tr>";
+          for (var j = 0; j < 7; j++) {
+            var day = j + 1 + 7 * i - dayNumber;
+            if (day > lastDay || day < 1) {
+              day = "";
+            }
+            markup += "<td>" + day + "</td>";
+          }
+          markup += "</tr>";
+        }
+        console.log(markup);
+
+        tbody.html(markup);
+        $("#monthText").text(value + 1);
+        $("#month").val(value + 1);
+      });
+    </script>
+  </body>
+</html>
