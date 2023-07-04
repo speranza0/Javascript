@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div class="div-wrap">
+    <div class="header-wrap">
+      <div class="header-in">
+        <input type="text" id="input" placeholder="할일을 입력해주세요">
+        <button type="submit" id="submit">등록</button>
+      </div>
+    </div>
+    <div class="content-wrap">
+      <div class="filter">
+        <input type="text" id="search" placeholder="검색할 내용을 입력해주세요">
+        <button type="submit" id="searchBtn">검색</button>
+        검색 조건 : 
+        <select id="selectBox">
+          <option value="all" selected>전체</option>
+          <option value="todo">할일</option>
+          <option value="success">완료</option>
+        </select>
+      </div>
+      <div id="list-box">
+        할 일 목록
+        <ul id="todoList">
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="index2.js"></script>
+</html>
